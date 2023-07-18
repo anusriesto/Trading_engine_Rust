@@ -1,5 +1,6 @@
 use super::orderbook::{OrderBook,Order};
 use std::collections::HashMap;
+use rust_decimal::prelude::*;
 
 //quote is what we sell in the return of base
 //base bitcoin
@@ -39,7 +40,7 @@ impl MatchingEngine{
     }
 
     pub fn place_limit_order(&mut self,
-    pair:TradingPair,price:f64,order:Order)->Result<(),String>{
+    pair:TradingPair,price:Decimal,order:Order)->Result<(),String>{
         match self.orderbooks.get_mut(&pair){
             Some(orderbook)=>{
                 orderbook.add_order(price, order);
